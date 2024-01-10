@@ -327,3 +327,54 @@ function finderName(arr, value) {
   console.log(false)
 }
 finderName(nameFinder, "Peter")
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteration #8: Contador de repeticiones**
+
+ * ? Crea una función que nos devuelva el número de veces que se repite cada una de las palabras que lo conforma. Puedes usar este array para probar tu función:
+ * ? const counterWords = [
+* ? code",
+* ? repeat",
+* ? eat",
+* ? sleep",
+* ? code",
+* ? enjoy",
+* ? sleep",
+* ? code",
+* ? enjoy",
+* ? upgrade",
+* ? code",
+* ? ];
+ * 
+ * ? function repeatCounter(param) {
+ * ?  insert code
+ * ? }
+ */
+//!--------------------------------------------------------------------------------------------------------
+const counterWords = [
+  "code",
+  "repeat",
+  "eat",
+  "sleep",
+  "code",
+  "enjoy",
+  "sleep",
+  "code",
+  "enjoy",
+  "upgrade",
+  "code",
+];
+
+function repeatCounter(param) {
+  const newObj = {}
+  param.forEach(el => {
+    if (newObj[el]) {
+      newObj[el] += 1
+      return
+    }
+    newObj[el] = 1
+  });
+  console.log(newObj);
+}
+repeatCounter(counterWords)
