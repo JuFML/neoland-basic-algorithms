@@ -251,7 +251,7 @@ const duplicates = [
 
 function removeDuplicates(param) {
   if (new Set(param).size < param.length) {
-    return new Set(param)
+    return Array.from(new Set(param))
   }
   return param
 }
