@@ -147,7 +147,7 @@ numbers = [12, 21, 38, 5, 45, 37, 6];
 function average(param) {
   return param.reduce((acc, number) => {
     return acc += number
-  }, 0) / param.length - 1
+  }, 0) / param.length
 }
 
 console.log(average(numbers))
