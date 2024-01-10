@@ -110,7 +110,7 @@ function sumAll(param) {
  * ? }
  */
 //!--------------------------------------------------------------------------------------------------------
-const numbers = [1, 2, 3, 5, 45, 37, 58];
+let numbers = [1, 2, 3, 5, 45, 37, 58];
 
 function sumAll(param) {
   return param.reduce((acc, number) => {
@@ -119,3 +119,35 @@ function sumAll(param) {
 }
 
 console.log(sumAll(numbers))
+
+/* 
+**Iteración #4: Calcular el promedio**
+
+Calcular un promedio es una tarea extremadamente común. Puedes usar este array para probar tu función:
+
+const numbers = [12, 21, 38, 5, 45, 37, 6];
+function average(param) {
+  insert code
+}
+*/
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteración #4: Calcular el promedio**
+
+ * ? Calcular un promedio es una tarea extremadamente común. Puedes usar este array para probar tu función:
+ * ? const numbers = [12, 21, 38, 5, 45, 37, 6];
+ * ? function average(param) {
+ * ?   insert code
+ * ? } 
+ */
+//!--------------------------------------------------------------------------------------------------------
+numbers = [12, 21, 38, 5, 45, 37, 6];
+
+function average(param) {
+  return param.reduce((acc, number) => {
+    return acc += number
+  }, 0) / param.length - 1
+}
+
+console.log(average(numbers))
