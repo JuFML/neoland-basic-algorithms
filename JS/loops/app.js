@@ -109,3 +109,34 @@ const placesToTravel = [
 for (const place of placesToTravel) {
   console.log(place);
 }
+
+/*
+**Iteración #4: Probando For...in**
+
+Usa un **for...in** para imprimir por consola los datos del alienígena.. Puedes usar este objeto:
+
+const alien = {
+  name: "Wormuck",
+  race: "Cucusumusu",
+  planet: "Eden",
+  weight: "259kg",
+};
+*/
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteración #4: Probando For...in**
+ * ? Usa un **for...in** para imprimir por consola los datos del alienígena.. Puedes usar este objeto:
+ */
+//!--------------------------------------------------------------------------------------------------------
+
+const alien = {
+  name: "Wormuck",
+  race: "Cucusumusu",
+  planet: "Eden",
+  weight: "259kg",
+};
+
+for (const prop in alien) {
+  console.log(`${prop}: ${alien[prop]}`);
+}
