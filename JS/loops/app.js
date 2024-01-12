@@ -65,9 +65,47 @@ const alumns = [
 ];
 
 alumns.forEach(alumn => {
-  const wasApprovedInAtLeastTwoQuarters = !alumn.T1 && alumn.T2 && alumn.T3 || alumn.T1 && !alumn.T2 && alumn.T3 || alumn.T1 && alumn.T2 && !alumn.T3 || alumn.T1 && alumn.T2 && alumn.T3
+  const { T1, T2, T3 } = alumn
+  const wasApprovedInAtLeastTwoQuarters = !T1 && T2 && T3 || T1 && !T2 && T3 || T1 && T2 && !T3 || T1 && T2 && T3
 
   wasApprovedInAtLeastTwoQuarters ? alumn.isApproved = true : alumn.isApproved = false
 })
 
 console.log(alumns);
+
+/*
+**Iteración #3: Probando For...of**
+
+Usa un bucle forof para recorrer todos los destinos del array. Imprime en un **_console.log_** sus valores.
+
+Puedes usar este array:
+
+const placesToTravel = [
+  "Japon",
+  "Venecia",
+  "Murcia",
+  "Santander",
+  "Filipinas",
+  "Madagascar",
+];
+*/
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteración #3: Probando For...of**
+ * ? Usa un bucle forof para recorrer todos los destinos del array. Imprime en un **_console.log_** sus valores.
+ */
+//!--------------------------------------------------------------------------------------------------------
+
+const placesToTravel = [
+  "Japon",
+  "Venecia",
+  "Murcia",
+  "Santander",
+  "Filipinas",
+  "Madagascar",
+];
+
+for (const place of placesToTravel) {
+  console.log(place);
+}
