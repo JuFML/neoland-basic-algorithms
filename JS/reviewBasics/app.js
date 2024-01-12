@@ -249,3 +249,39 @@ for (let user of users) {
   }
 }
 console.log(manyTimesSoundAdded);
+
+/*
+**Iteración #4: Métodos findArrayIndex**
+
+Crea una función llamada `findArrayIndex` que reciba como parametros un array de textos y un texto y devuelve la posición del array cuando el valor del array sea igual al valor del texto que enviaste como parametro. Haz varios ejemplos y compruebalos.
+
+Sugerencia de función:
+
+function findArrayIndex(array, text) {}
+
+Ej array:
+
+["Caracol", "Mosquito", "Salamandra", "Ajolote"];
+*/
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteración #4: Métodos findArrayIndex**
+ * ? Crea una función llamada `findArrayIndex` que reciba como parametros un array de textos y un texto y devuelve la posición del array cuando el valor del array sea igual al valor del texto que enviaste como parametro. Haz varios ejemplos y compruebalos.
+ */
+//!--------------------------------------------------------------------------------------------------------
+
+const animals = ["Caracol", "Mosquito", "Salamandra", "Ajolote"];
+
+function findArrayIndex(array, text) {
+  const textToBeSearched = text.toLowerCase()
+  let arraySanitized = []
+
+  array.forEach(item => {
+    arraySanitized = [...arraySanitized, item.toLowerCase()]
+  })
+
+  return arraySanitized.includes(textToBeSearched) && arraySanitized.indexOf(textToBeSearched)
+}
+
+console.log(findArrayIndex(animals, "mosquito"))
