@@ -305,3 +305,35 @@ const rollDice = (numeroCaras) => {
 
 const diceResult = rollDice(5)
 console.log(diceResult)
+
+/*
+**Iteración #6: Función swap**
+
+Crea una función llamada `swap()` que reciba un array y dos parametros que sean indices del array. La función deberá intercambiar la posición de los valores de los indices que hayamos enviado como parametro. Retorna el array resultante.
+
+Sugerencia de array:
+
+```jsx
+["Mesirve", "Cristiano Romualdo", "Fernando Muralla", "Ronalguiño"];
+*/
+
+//!--------------------------------------------------------------------------------------------------------
+/**
+ * ? **Iteración #6: Función swap**
+ * ? Crea una función llamada `swap()` que reciba un array y dos parametros que sean indices del array. La función deberá intercambiar la posición de los valores de los indices que hayamos enviado como parametro. Retorna el array resultante.
+ */
+//!--------------------------------------------------------------------------------------------------------
+
+const personas = ["Mesirve", "Cristiano Romualdo", "Fernando Muralla", "Ronalguiño"];
+const swap = (arr, index1, index2) => {
+  const firstEl = arr[index1]
+  const secondEl = arr[index2]
+
+  arr[index1] = secondEl
+  arr[index2] = firstEl
+
+  return arr
+}
+
+const arrayEdited = swap(personas, 0, 1)
+console.log(arrayEdited);
