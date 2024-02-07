@@ -1,5 +1,7 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const Product = require("../models/Product.model");
+const Supermarket = require("../models/Supermarket.model");
+
 
 const registerProduct = async (req, res, next) => {
   let catchImg = req.file?.path;
@@ -33,4 +35,80 @@ const registerProduct = async (req, res, next) => {
   }
 };
 
-module.exports = { registerProduct }
+const toggleSupermarket = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { supermarkets } = req.body;
+    const productById = await Product.findById(id);
+
+    if (productById) {
+      const arrayIdSupermarkets = supermarkets.split(",");
+      Promise.all(
+        arrayIdSupermarkets.map(async (supermarket, index) => {
+          if (productById.supermarkets.includes(supermarket)) {
+
+            try {
+              await Product.findByIdAndUpdate(id, {
+                $pull: { supermarkets: supermarket },
+              });
+
+              try {
+                await Supermarket.findByIdAndUpdate(supermarket, {
+                  $pull: { products: id },
+                });
+              } catch (error) {
+                res.status(404).json({
+                  error: "error update supermarket",
+                  message: error.message,
+                }) && next(error);
+              }
+            } catch (error) {
+              res.status(404).json({
+                error: "error update product",
+                message: error.message,
+              }) && next(error);
+            }
+          } else {
+
+            try {
+              await Product.findByIdAndUpdate(id, {
+                $push: { supermarkets: supermarket },
+              });
+              try {
+                await Supermarket.findByIdAndUpdate(supermarket, {
+                  $push: { products: id },
+                });
+              } catch (error) {
+                res.status(404).json({
+                  error: "error update supermarket",
+                  message: error.message,
+                }) && next(error);
+              }
+            } catch (error) {
+              res.status(404).json({
+                error: "error update product",
+                message: error.message,
+              }) && next(error);
+            }
+          }
+        })
+      ).catch((error) => res.status(404).json(error.message))
+        .then(async () => {
+          return res.status(200).json({
+            dataUpdate: await Product.findById(id).populate("supermarkets"),
+          });
+        });
+    } else {
+      return res.status(404).json("este producto no existe");
+    }
+  } catch (error) {
+    return (
+      res.status(404).json({
+        error: "error catch",
+        message: error.message,
+      }) && next(error)
+    );
+  }
+};
+
+module.exports = { registerProduct, toggleSupermarket }

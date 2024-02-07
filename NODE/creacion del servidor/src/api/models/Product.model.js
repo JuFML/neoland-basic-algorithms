@@ -19,7 +19,7 @@ const ProductSchema = new mongoose.Schema(
       trim: true,
     },
     /// cuando relacionamos un modelo de con otro lo hacemos con populate y el ref a otro modelo
-    supermarket: [{ type: mongoose.Schema.Types.ObjectId, ref: "Supermarket" }],
+    supermarkets: [{ type: mongoose.Schema.Types.ObjectId, ref: "Supermarket" }],
     image: {
       type: String,
       required: true,
