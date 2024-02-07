@@ -124,4 +124,21 @@ const getById = async (req, res, next) => {
   }
 };
 
-module.exports = { registerSupermarket, toggleProduct, getById }
+const getAll = async (req, res, next) => {
+  try {
+    const allSupermarkets = await Supermarket.find().populate("products");
+
+    if (allSupermarkets.length > 0) {
+      return res.status(200).json(allSupermarkets);
+    } else {
+      return res.status(404).json("no se han encontrado supermercados");
+    }
+  } catch (error) {
+    return res.status(404).json({
+      error: "error al buscar - lanzado en el catch",
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { registerSupermarket, toggleProduct, getById, getAll }
