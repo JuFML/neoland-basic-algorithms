@@ -111,4 +111,18 @@ const toggleSupermarket = async (req, res, next) => {
   }
 };
 
-module.exports = { registerProduct, toggleSupermarket }
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const productById = await Product.findById(id);
+    if (productById) {
+      return res.status(200).json(productById);
+    } else {
+      return res.status(404).json("no se ha encontrado el producto");
+    }
+  } catch (error) {
+    return res.status(404).json(error.message);
+  }
+};
+
+module.exports = { registerProduct, toggleSupermarket, getById }
