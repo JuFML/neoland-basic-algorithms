@@ -160,4 +160,34 @@ const getByName = async (req, res, next) => {
   }
 };
 
-module.exports = { registerSupermarket, toggleProduct, getById, getAll, getByName }
+const deleteSupermarket = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const supermarket = await Supermarket.findByIdAndDelete(id);
+    if (supermarket) {
+      // lo buscamos para vr si sigue existiendo o no
+      const findByIdSupermarket = await Supermarket.findById(id);
+
+      try {
+        const test = await Product.updateMany(
+          { supermarket: id },
+          { $pull: { supermarket: id } }
+        );
+        console.log(test);
+
+        return res.status(findByIdSupermarket ? 404 : 200).json({
+          deleteTest: findByIdSupermarket ? false : true,
+        });
+      } catch (error) {
+        return res.status(404).json({
+          error: "error catch update Product",
+          message: error.message,
+        });
+      }
+    }
+  } catch (error) {
+    return res.status(404).json(error.message);
+  }
+};
+
+module.exports = { registerSupermarket, toggleProduct, getById, getAll, getByName, deleteSupermarket }
