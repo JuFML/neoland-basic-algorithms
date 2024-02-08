@@ -48,14 +48,9 @@ const registerWithRedirect = async (req, res, next) => {
 
 const sendCode = async (req, res, next) => {
   try {
-    /// sacamos el param que hemos recibido por la ruta
-    /// recuerda la ruta: http://localhost:${PORT}/api/v1/users/register/sendMail/${userSave._id}
     const { id } = req.params;
-
-    /// VAMOS A BUSCAR EL USER POR ID para tener el email y el codigo de confirmacion
     const userDB = await User.findById(id);
 
-    /// ------------------> envio el codigo
     const emailEnv = process.env.EMAIL;
     const password = process.env.PASSWORD;
 
@@ -95,7 +90,6 @@ const sendCode = async (req, res, next) => {
 
 const resendCode = async (req, res, next) => {
   try {
-    //! vamos a configurar nodemailer porque tenemos que enviar un codigo
     const email = process.env.EMAIL;
     const password = process.env.PASSWORD;
     const transporter = nodemailer.createTransport({
@@ -106,7 +100,6 @@ const resendCode = async (req, res, next) => {
       },
     });
 
-    //! hay que ver que el usuario exista porque si no existe no tiene sentido hacer ninguna verificacion
     const userExists = await User.findOne({ email: req.body.email });
 
     if (userExists) {
@@ -140,13 +133,11 @@ const resendCode = async (req, res, next) => {
 
 const checkNewUser = async (req, res, next) => {
   try {
-    //! nos traemos de la req.body el email y codigo de confirmation
     const { email, confirmationCode } = req.body;
 
     const userExists = await User.findOne({ email });
 
     if (!userExists) {
-      //!No existe----> 404 de no se encuentra
       return res.status(404).json("User not found");
     } else {
       if (confirmationCode === userExists.confirmationCode) {

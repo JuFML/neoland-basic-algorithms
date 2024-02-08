@@ -9,45 +9,57 @@ const UserSchema = new mongoose.Schema(
       required: true,
       trim: true,
       unique: true,
-      validate: [validator.isEmail, 'Email not valid']
+      validate: [validator.isEmail, "Email not valid"],
     },
     name: {
       type: String,
       required: true,
       trim: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
       required: true,
       trim: true,
-      validate: [validator.isStrongPassword]
+      validate: [validator.isStrongPassword], //minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1
     },
     gender: {
       type: String,
+      enum: ["hombre", "mujer", "otros"],
       required: true,
-      enum: ['hombre', 'mujer', 'otros']
     },
     rol: {
       type: String,
-      enum: ['admin', 'user', 'superadmin'],
-      default: 'user'
+      enum: ["admin", "user", "superadmin"],
+      default: "user",
     },
     confirmationCode: {
       type: Number,
-      required: true
+      required: true,
     },
     check: {
       type: Boolean,
-      default: false
+      default: false,
     },
     image: {
-      type: String
-    }
+      type: String,
+    },
+    moviesFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
+    charactersFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "Character" }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    followed: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    chats: [{ type: mongoose.Schema.Types.ObjectId, ref: "Chat" }],
+    banned: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    blockedByApp: { type: Boolean, default: false },
+    commentsPublicByOther: [
+      { type: mongoose.Schema.Types.ObjectId, ref: "Message" },
+    ],
+    postedMessages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }]
   },
   {
-    timestamps: true
-  })
+    timestamps: true,
+  }
+);
 
 UserSchema.pre('save', async function (next) {
   try {
