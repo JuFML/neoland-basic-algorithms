@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+
+// Ha llegado el momento de ponerse a trabajar con ReactJS, para ello os proponemos una pequeña práctica que os ayude afianzar el funcionamiento de `JSX`.
+
+// 1. Crea una aplicación de ReactJS con vite → name: jsx-basics.
+// 2. Renderiza “Buenos días” [6-12] , “Buenas tardes” [13-19] o “Buenas noches”[20-5] según el valor numérico asignado.
+// 3. Recorrer los elementos de un array y renderizalos ⇒ Si os da un error de keys en la consola podéis usar el index como `key={index}` .
+// 4. Mappea un array de objetos para pintarlos.
+// 5. Crea un botón que modifique un valor de false a true y renderice un contenido cuando este valor se modifique.
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [renderiza, setRenderiza] = useState(true);
+  const x = 12;
+  const personas = ["Juliana", "Clara", "Nacho", "Natalia"];
+
+  const handleClick = () => setRenderiza(!renderiza);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+      {x >= 6 && x <= 12 ? (
+        <p>Buenos días</p>
+      ) : x >= 13 && x <= 19 ? (
+        <p>Buenos tardes</p>
+      ) : (
+        <p>Buenas noches</p>
+      )}
+
+      {personas.map((persona, index) => (
+        <p key={index}>{persona}</p>
+      ))}
+
+      {renderiza ? (
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          El valor de renderiza es <strong>true</strong>
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      ) : (
+        <p>
+          El valor de renderiza es <strong>false</strong>
+        </p>
+      )}
+      <button onClick={() => handleClick()}>CAMBIAR FRASE</button>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
